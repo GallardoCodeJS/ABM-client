@@ -1,135 +1,67 @@
-import React, { useEffect, useState } from 'react';
-import Axios from 'axios';
+import React from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
-//Funcion de formularios
-function App() {
+//Toma función de otra pagina para mostrar
+import Control from './control.js';
+import CrearUsuario from './CreateUser.js';
+import {ListarPersonas, ListarUsuarios} from './ListUser.js';
+import Statistcs from './StatisticsUser.js';
+import ViewUser from './ViewUser.js';
 
-  //Crea los estados
-  const [Ci,      setCi]      = useState("");
-  const [Age,     setAge]     = useState("");
-  const [Name,    setName]    = useState("");
-  const [Email,   setEmail]   = useState("");
-  const [Listado, setListado] = useState([]); //Array
+//Aca exporta el archivo con las rutas armadas
+export default function BasicExample() {
+  return (
+    <Router>
+      <div>
+        <ul>
+          <li>
+            <Link to="/Statistcs">Home</Link>
+          </li>
+          <li>
+            <Link to="/CrearUsuario">Crear Persona</Link>
+          </li>
+          <li>
+            <Link to="/Control">Crear Usuario</Link>
+          </li>
+          <li>
+            <Link to="/ListarPersonas">Listado de persona</Link>
+          </li>
+          <li>
+            <Link to="/ListarUsuarios">Listado de usuarios</Link>
+          </li>
+          <li>
+            <Link to="/ViewUser">Ver usuario</Link>
+          </li>
+        </ul>
+        <hr/>
 
-  useEffect(()=>{
-    Axios.get('http://localhost:3001/api/get').then((response)=>{
-      setListado(response.data)
-      //console.log(response.data);
-    });
-  },[]);
-
-  //Axios use HERE
-  //CREA EL INSERT DE USUARIO
-  const submiteData = () => {
-    Axios.post('http://localhost:3001/api/insert',{
-      Ci:Ci,
-      Age:Age,
-      Name:Name,
-      Email:Email,
-    });  
-  
-  //Refresaca el get sin refrescar la pagina
-  setListado([
-    ...Listado,
-      { Ci:Ci, Age:Age, Name:Name, Email:Email },
-    ]);
-  };
-  
-  //EDIT USER
-  const editUser = (Ci) => {
-    Axios.post('http://localhost:3001/api/useredit',{
-      Ci:Ci,
-    })};
-  
-  //DELETE USER
-  const deleteUser = (Ci) => {
-    Axios.post('http://localhost:3001/api/userdelete',{
-      Ci:Ci,
-    })  
-  };
-
-  //VIEW USER
-  const viewUser = (Ci) => {
-    Axios.post('http://localhost:3001/api/userview',{
-      Ci:Ci,
-    })};
-  
-  
-
-  return(
-    <div className="App">
-      <h1>Crud Application</h1>
-
-      <div className="form">
-        <label>C.I.:</label>
-        <input 
-          type="number"
-          name="Ci"
-          onChange={(e)=>{
-          setCi(e.target.value);
-        }}/>
-
-        <label>Age:</label>
-        <input 
-          type="number" 
-          name="Age" 
-          onChange={(e)=>{
-          setAge(e.target.value);
-        }}/>
-
-        <label>Name:</label>
-        <input type="text" 
-          name="Name" 
-          onChange={(e)=>{
-          setName(e.target.value);
-        }}/>
-
-        <label>Email:</label>
-        <input type="text" 
-          name="Email" 
-          onChange={(e)=>{
-          setEmail(e.target.value);
-        }}/>
-
-        <button onClick={submiteData}>Enviar</button>
-        
+        <Switch >
+          <Route exact path="/Statistcs">
+            <Statistcs />
+          </Route>
+          <Route path="/CrearUsuario">
+            <CrearUsuario />
+          </Route>
+          <Route path="/ListarPersonas">
+            <ListarPersonas />
+          </Route>
+          <Route path="/Control">
+            <Control />
+          </Route>
+          <Route path="/ListarUsuarios">
+            <ListarUsuarios />
+          </Route>
+          <Route path="/ViewUser">
+            <ViewUser />
+          </Route>
+        </Switch>
       </div>
-    
-    <div className="usertable">
-      <h1>Listado de Persona</h1>
-      <table>
-        <tr>
-          <th>Ci</th>
-          <th>Name</th> 
-          <th>Age</th>
-          <th>Actions</th>
-        </tr>      
-          {Listado.map((val)=>{
-              return (
-              <tr>              
-                <td>{val.Ci}</td>
-                <td>{val.Name}</td>
-                <td>{val.Age}</td>
-                <td>
-                  <button className="editbutton"
-                    onClick={() => {
-                    editUser(val.Ci)}}>Edit</button>
-                  <button className="deletebutton"
-                    onClick={() => {
-                    deleteUser(val.Ci)}}>Delete</button>
-                  <button className="viewbutton"
-                    onClick={() => {
-                    viewUser(val.Ci)}}>View</button>
-                </td>
-              </tr>
-              );
-            })} 
-      </table>
-    </div>
-    
-    </div>
+    </Router>
+
   );
 }
-    
-//Exporta la clase
-export default App;

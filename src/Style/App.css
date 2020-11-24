@@ -1,0 +1,139 @@
+/* Para las Ventanas modales de ANTD*/
+@import '~antd/dist/antd.css';
+
+.App {
+  text-align: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.form input {
+  border: 1px solid #333333;
+  width: 300px;
+  height: 30px;
+  margin: 10px;
+  font-size: 25px;
+}
+
+.form input:focus{
+  border: 3px solid #D1F2EB;
+}
+
+.form input:hover{
+  box-shadow: 1px 1px 5px #aaaaaa;
+}
+
+
+.form button{
+  width: 150px;
+  height: 40px;
+  border-style: hidden;
+  background-color:#AED6F1;
+  color: white;
+  transition: 
+    margin-top 0.25s, 
+    width 0.10s,
+    height 0.10s,
+    border-radius 1.02s, 
+    color 1.05s, 
+    background-color 1.05s;
+}
+
+.form button:hover{
+  /*margin-top: 1px;*/
+  border-radius: 10px;
+  width: 155px;
+  height: 45px;
+  background-color: #F1948A;
+  color: black;
+}
+
+.registros p{  
+  text-align: left;
+  margin-left: 0px;
+}
+
+/* LOGIN */
+.LoginForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.LoginForm input {
+  width: 300px;
+  height: 25px;
+  margin: 10px;
+  font-size: 25px;
+}
+/* USER TABLE */
+.usertable button {
+  width: 80px;
+  height: 30px;
+  border-style: none;
+  margin-right: 5px;
+  margin-left: 5px;
+  transition: color .55s, box-shadow 0.26s;
+}
+
+/* ACTION BUTTON */
+.editbutton {  
+  margin-top: 5px;
+  margin-bottom: 5px;
+  background-color: chartreuse;
+}
+.deletebutton {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  background-color: red;
+}
+.viewbutton {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  background-color: gold;
+}
+
+.usertable button:hover {
+  color: white;
+  box-shadow: 1px 1px 5px #aaaaaa;
+}
+
+/* TABLA DE LISTADO DE USUARIO */
+.usertable {
+  display: flex;
+  flex-direction: column;  
+  align-items: center;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.usertable input{
+  align-items: center;
+}
+
+.usertable table {  
+  align-items: center;
+  text-align: center;
+  border-collapse: collapse;
+  border: 1px solid black;
+}
+
+th {
+  width: 300px;
+  border: 1px solid black;
+}
+
+tr th{
+  flex-direction: column;
+  width: flex;
+}
+
+tr td {
+  border: 1px solid black;
+}

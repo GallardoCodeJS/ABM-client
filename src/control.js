@@ -1,3 +1,4 @@
+//CREAR USUARIOS
 import React, { useEffect,useState } from 'react';
 import Axios from 'axios';
 
@@ -28,7 +29,7 @@ function Control(){
   };
     
     return(
-        <div className="LoginForm">
+        <div className="form">
             <h1>Login</h1>
 
             <label>User ID:</label>
@@ -50,12 +51,12 @@ function Control(){
 
             <button onClick={submitLogin}>Ingresar</button>
 
+            <h1>El listado es solo de prueba ya no sirve!</h1>
             {userlist.map((val)=>{
                 return (
-                <h1 key={val}>C.I.:{val.Id} | Name:{val.Name} | Pass:{val.Password}</h1>
+                <p key={val}>C.I.:{val.Id} | Name:{val.Name} | Pass:{val.Password}</p>
                 );
             })}
-
         </div>        
     );
 }
