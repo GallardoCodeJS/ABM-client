@@ -31,6 +31,7 @@
   
 .Edit input:hover{
     box-shadow: 1px 1px 5px #aaaaaa;
+    border-radius: 0px;
 }
 
 /* EDIT BUTTON */
@@ -38,6 +39,7 @@
     width: 150px;
     height: 40px;
     margin-left: 5px;
+    margin-bottom: 5px;
     border-style: hidden;
     background-color:#AED6F1;
     color: white;

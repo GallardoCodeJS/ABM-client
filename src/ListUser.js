@@ -107,11 +107,11 @@ function ListarPersonas() {
                               <br/>
                               <label>Name:</label>
                               <br/>
-                              <input value={Name} onChange={(e)=>{setName(e.target.value);}}/>
+                              <input value={Name} maxlength="35" onChange={(e)=>{setName(e.target.value);}}/>
                               <br/>
                               <label>Age:</label>
                               <br/>
-                              <input type="number" value={Age} onChange={(e)=>{setAge(e.target.value);}}/>
+                              <input type="number" min="1" max="110" value={Age} onChange={(e)=>{setAge(e.target.value);}}/>
                               <br/>
                               <label>Email:</label>
                               <br/>

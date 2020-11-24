@@ -98,6 +98,7 @@
 
 .usertable button:hover {
   color: white;
+  border-radius: 5px;
   box-shadow: 1px 1px 5px #aaaaaa;
 }
 
@@ -135,6 +136,3 @@ tr td {
   border: 1px solid black;
 }
 
-li :focus{
-  background-color: red;
-}

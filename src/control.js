@@ -1,5 +1,5 @@
 //CREAR USUARIOS
-import React, { useEffect,useState } from 'react';
+import React, {useState } from 'react';
 import Axios from 'axios';
 
 function Control(){
@@ -8,14 +8,6 @@ function Control(){
     const [id,       setid]        = useState("");
     const [user,     setuser]      = useState("");
     const [pass,     setpass]      = useState("");
-    const [userlist, setuserlist]  = useState([]); //Array
-
-    //Consulta select todos los usuarios
-    useEffect(()=>{
-        Axios.get('http://localhost:3001/api/loginselect').then((response)=>{
-            setuserlist(response.data)
-        });
-    },[]);
     
     //Axios use HERE to sent info
     const submitLogin = () => {
@@ -48,15 +40,7 @@ function Control(){
                 onChange={(e)=>{
                 setpass(e.target.value);
             }}/>
-
             <button onClick={submitLogin}>Ingresar</button>
-
-            <h1>El listado es solo de prueba ya no sirve!</h1>
-            {userlist.map((val)=>{
-                return (
-                <p key={val}>C.I.:{val.Id} | Name:{val.Name} | Pass:{val.Password}</p>
-                );
-            })}
         </div>        
     );
 }
