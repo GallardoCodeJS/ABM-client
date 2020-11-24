@@ -1,6 +1,3 @@
-/* Para las Ventanas modales de ANTD*/
-@import '~antd/dist/antd.css';
-
 .App {
   text-align: center;
 }
@@ -136,4 +133,8 @@ tr th{
 
 tr td {
   border: 1px solid black;
+}
+
+li :focus{
+  background-color: red;
 }

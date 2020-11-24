@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 //Toma el css
 import './Style/App.css';
 import './Style/Head.css';
+import './Style/Edit.css';
 
 import App from './App';
 

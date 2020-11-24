@@ -3,42 +3,38 @@ import React,{ useEffect,useState } from 'react';
 import Modal from 'react-modal';
 import Axios from 'axios';
 
-const customStyles = {
-  content : {
-    top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)'
-  }
-};
-
 function ListarPersonas() {
 
-    var subtitle;
+  //Estilo de la ventana MODAL
+  const customStyles = {
+    content : {
+      top                   : '50%',
+      left                  : '50%',
+      right                 : 'auto',
+      bottom                : 'auto',
+      marginRight           : '-50%',
+      transform             : 'translate(-50%, -50%)'
+    }
+  };
+
     //Crea los estados
-    const [Listado, setListado] = useState([]); //Array
+    const [Listado, setListado]   = useState([]); //Array
+    const [modalIsOpen,setIsOpen] = useState(false); //Ventana modal
     
+    //Constantes para editar usuario
     const [Ci,      setCi]      = useState([]);
     const [Name,    setName]    = useState([]);
     const [Age,     setAge]     = useState([]);
-    
-
-    const [modalIsOpen,setIsOpen] = useState(false); //Ventana modal
-  
-    var total = 0;
+    const [Email,   setEmail]   = useState([]);
+    var total = 0;//Total de regitros de usuario
 
     //Incio de ventana modal
-    function openModal(Ci,Name,Age) {
+    function openModal(Ci,Name,Age,Email) {
       setCi(Ci);
       setName(Name);
       setAge(Age);
+      setEmail(Email);
       setIsOpen(true);
-    }
-    function afterOpenModal() {
-      // references are now sync'd and can be accessed.
-      subtitle.style.color = '#f00';
     }
     //Al cerrar ventana modal
     function closeModal(){
@@ -53,9 +49,12 @@ function ListarPersonas() {
     },[]);
   
     //EDIT USER
-    const editUser = (Ci) => {
+    const editUser = (Ci,Name,Age,Email) => {
       Axios.post('http://localhost:3001/api/useredit',{
-        Ci:Ci
+        Ci:Ci,
+        Name:Name,
+        Age:Age,
+        Email:Email
       })};
     
     //DELETE USER
@@ -79,6 +78,7 @@ function ListarPersonas() {
             <th>Ci</th>
             <th>Name</th> 
             <th>Age</th>
+            <th>Email</th>
             <th>Actions</th>
           </tr>      
             {Listado.map((val)=>{
@@ -89,39 +89,47 @@ function ListarPersonas() {
                     <td>{val.Ci}</td>
                     <td>{val.Name}</td>
                     <td>{val.Age}</td>
+                    <td>{val.Email}</td>
                     <td>
-                      <button className="editbutton" onClick={() => {
-                        editUser(val.Ci)}}>Edit</button>
+                        <button className="editbutton" onClick={() => {
+                          openModal(val.Ci,val.Name,val.Age,val.Email)}}>Edit</button>
+                        <Modal
+                          isOpen={modalIsOpen}
+                          onRequestClose={closeModal}
+                          style={customStyles}
+                          contentLabel="Example Modal">
+                        <form className="Edit">
+                          <h2>Editing user "{Name}"</h2>
+                            <div>
+                              <label>C.I.:</label>
+                              <br/>
+                              <input value={Ci} disabled/>
+                              <br/>
+                              <label>Name:</label>
+                              <br/>
+                              <input value={Name} onChange={(e)=>{setName(e.target.value);}}/>
+                              <br/>
+                              <label>Age:</label>
+                              <br/>
+                              <input type="number" value={Age} onChange={(e)=>{setAge(e.target.value);}}/>
+                              <br/>
+                              <label>Email:</label>
+                              <br/>
+                              <input type="email" value={Email} onChange={(e)=>{setEmail(e.target.value);}}/>
+                              <br/>
+                            </div>                                                      
+                          <button>Cancelar</button>
+                          <button onClick={() => {
+                                    editUser(Ci,Name,Age,Email)}}>Aplicar</button>
+                        </form>
+                        </Modal>
+                        
                       <button className="deletebutton"
                         onClick={() => {
                         deleteUser(val.Ci)}}>Delete</button>
                       <button className="viewbutton"
                         onClick={() => {
                         viewUser(val.Ci)}}>View</button>
-
-
-                        <button onClick={() => {
-                          openModal(val.Ci,val.Name,val.Age)}}>Open Modal</button>
-                        <Modal
-                          isOpen={modalIsOpen}
-                          onAfterOpen={afterOpenModal}
-                          onRequestClose={closeModal}
-                          style={customStyles}
-                          contentLabel="Example Modal"
-                        >
-                
-                          <h2 ref={_subtitle => (subtitle = _subtitle)}>Editar usuario</h2>
-                          <div>
-                            <input value={Ci}/>
-                            <input value={Name}/>
-                            <input value={Age}/>
-                          </div>
-                          <form>                            
-                            <button>Cancelar</button>
-                            <button onClick={() => {
-                                    editUser(Ci)}}>Aplicar</button>
-                          </form>
-                        </Modal>
                     </td>
                   </tr>
                   );
