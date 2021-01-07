@@ -53,7 +53,7 @@ function CrearUsuario() {
       errormsj.style.display = 'block';
     } else {
       errormsj.style.display = 'none';
-      alert("Usuario creado correctamente");
+      alert("Usuario creado correctamente!");
         //Limpia los imputs
         setName('');
         setAge('');
