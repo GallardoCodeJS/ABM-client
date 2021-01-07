@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
 
-function LoginUser (){
-    
+function LoginUser() {
+
     //Crea los estados
     const [id, setid] = useState("");
     const [user, setuser] = useState("");
     const [pass, setpass] = useState("");
+
+    //Session actives
+    Axios.defaults.withCredentials = true;
 
     //Axios use HERE to sent info
     const submitLogin = () => {
@@ -14,10 +17,17 @@ function LoginUser (){
             id: id,
             user: user,
             pass: pass
-        }).then(() =>{
+        }).then(() => {
             alert("El usuario existe!");
         });
     };
+
+    //Take te seession from the server
+    useEffect(() => {
+        Axios.get("http://localhost:3001/api/login").then((response) => {
+            console.log(response);
+        })
+    }, [])
 
     return (
         <div className="form">
