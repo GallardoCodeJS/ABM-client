@@ -32,7 +32,7 @@ function LoginUser() {
             console.log(response);
             //Pregunta si existe una session, de ser el caso la muestra
             if (response.data.loggedIn === true) {
-                //Guarda la cookie en el explorador
+                //Guarda la cookie en el explorador!
                 setLoginStatus(response.data.user[0].Name);                
             }
         });
