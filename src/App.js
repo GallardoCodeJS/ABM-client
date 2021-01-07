@@ -7,11 +7,10 @@ import {
 } from "react-router-dom";
 
 //Toma función de otra pagina para mostrar
-import Control from './control.js';
 import CrearUsuario from './CreateUser.js';
 import {ListarPersonas, ListarUsuarios} from './ListUser.js';
 import Statistcs from './StatisticsUser.js';
-import ViewUser from './ViewUser.js';
+import LoginUser from './LoginUser.js';
 
 //Aca exporta el archivo con las rutas armadas
 export default function BasicExample() {
@@ -26,16 +25,13 @@ export default function BasicExample() {
             <Link to="/CrearUsuario">Crear Persona</Link>
           </li>
           <li>
-            <Link to="/Control">Crear Usuario</Link>
-          </li>
-          <li>
             <Link to="/ListarPersonas">Listado de persona</Link>
           </li>
           <li>
             <Link to="/ListarUsuarios">Listado de usuarios</Link>
           </li>
           <li>
-            <Link to="/ViewUser">Ver usuario</Link>
+            <Link to="/LoginUser">Login</Link>
           </li>
         </ul>
         <hr/>
@@ -50,14 +46,11 @@ export default function BasicExample() {
           <Route path="/ListarPersonas">
             <ListarPersonas />
           </Route>
-          <Route path="/Control">
-            <Control />
-          </Route>
           <Route path="/ListarUsuarios">
             <ListarUsuarios />
           </Route>
-          <Route path="/ViewUser">
-            <ViewUser />
+          <Route path="/LoginUser">
+            <LoginUser />
           </Route>
         </Switch>
       </div>

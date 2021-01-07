@@ -2,6 +2,10 @@
   text-align: center;
 }
 
+.App spam{
+  color: red;  
+}
+
 .form {
   display: flex;
   flex-direction: column;
@@ -123,13 +127,12 @@
 }
 
 th {
-  width: 300px;
   border: 1px solid black;
 }
 
 tr th{
   flex-direction: column;
-  width: flex;
+  width: fit-content;
 }
 
 tr td {
