@@ -5,8 +5,8 @@ function LoginUser() {
 
     //Crea los estados
     const [id, setid] = useState("");
-    const [user, setuser] = useState("");
     const [pass, setpass] = useState("");
+    const [loginStatus, setLoginStatus] = useState("");
 
     //Session actives
     Axios.defaults.withCredentials = true;
@@ -15,10 +15,14 @@ function LoginUser() {
     const submitLogin = () => {
         Axios.post('http://localhost:3001/api/login', {
             id: id,
-            user: user,
             pass: pass
-        }).then(() => {
-            alert("El usuario existe!");
+        }).then((response) => {
+            //alert("El usuario existe!");
+            if (response.data.message) {
+                setLoginStatus(response.data.message);
+            } else {
+                setLoginStatus(response.data[0].Name);
+            }
         });
     };
 
@@ -26,8 +30,13 @@ function LoginUser() {
     useEffect(() => {
         Axios.get("http://localhost:3001/api/login").then((response) => {
             console.log(response);
-        })
-    }, [])
+            //Pregunta si existe una session, de ser el caso la muestra
+            if (response.data.loggedIn === true) {
+                //Guarda la cookie en el explorador
+                setLoginStatus(response.data.user[0].Name);                
+            }
+        });
+    }, []);
 
     return (
         <div className="form">
@@ -38,18 +47,13 @@ function LoginUser() {
                 onChange={(e) => {
                     setid(e.target.value);
                 }} />
-
-            <label>User:</label>
-            <input type="text" name="user"
-                onChange={(e) => {
-                    setuser(e.target.value);
-                }} />
             <label>Password:</label>
             <input type="password" name="pass"
                 onChange={(e) => {
                     setpass(e.target.value);
                 }} />
             <button onClick={submitLogin}>Ingresar</button>
+            <p>{loginStatus}</p>
         </div>
     );
 }
