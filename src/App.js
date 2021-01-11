@@ -3,19 +3,26 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
+  useHistory
 } from "react-router-dom";
+
 
 //Toma función de otra pagina para mostrar
 import CrearUsuario from './CreateUser.js';
-import {ListarPersonas, ListarUsuarios} from './ListUser.js';
+import { ListarPersonas, ListarUsuarios } from './ListUser.js';
 import Statistcs from './StatisticsUser.js';
 import LoginUser from './LoginUser.js';
+import Userprofile from './Userprofile.js';
 
 //Aca exporta el archivo con las rutas armadas
 export default function BasicExample() {
+  
+  //Guarada historial de paginas
+  const history = useHistory();
+
   return (
-    <Router>
+    <Router history={history}>
       <div>
         <ul>
           <li>
@@ -34,7 +41,7 @@ export default function BasicExample() {
             <Link to="/LoginUser">Login</Link>
           </li>
         </ul>
-        <hr/>
+        <hr />
 
         <Switch >
           <Route exact path="/Statistcs">
@@ -52,9 +59,11 @@ export default function BasicExample() {
           <Route path="/LoginUser">
             <LoginUser />
           </Route>
+          <Route path="/Userprofile">
+            <Userprofile />
+          </Route>
         </Switch>
       </div>
     </Router>
-
   );
 }

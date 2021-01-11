@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import  { Redirect } from 'react-router-dom'
 import Axios from 'axios';
 
 function LoginUser() {
@@ -21,7 +22,9 @@ function LoginUser() {
             if (response.data.message) {
                 setLoginStatus(response.data.message);
             } else {
+                //alert("El usuario existe!");
                 setLoginStatus(response.data[0].Name);
+                return <Redirect to='/Userprofile'/>
             }
         });
     };
@@ -33,12 +36,13 @@ function LoginUser() {
             //Pregunta si existe una session, de ser el caso la muestra
             if (response.data.loggedIn === true) {
                 //Guarda la cookie en el explorador!
-                setLoginStatus(response.data.user[0].Name);                
+                setLoginStatus(response.data.user[0].Name);
             }
         });
     }, []);
 
     return (
+        
         <div className="form">
             <h1>Login</h1>
 
