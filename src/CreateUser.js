@@ -5,7 +5,12 @@ import Axios from 'axios';
 //Funcion de formularios
 function CrearUsuario() {
   var flag = false;
+  
+  // Variables de msj de error
   var msj = "";
+  var msjage = "";
+  var msjuser = "";
+
   //Crea los estados
   const [Ci, setCi] = useState("");
   const [Age, setAge] = useState("");
@@ -18,15 +23,24 @@ function CrearUsuario() {
 
     //Control de Name
     if (Name.length < 5 || Name.length > 35) {
-      msj = "\r\n Nombre fuera de rango";
+      msjuser = "\r\n Nombre fuera de rango";
       flag = true;
     }
 
     //Control de Age
     if (Age < 0 || Age > 110) {
       //Pasa el dato con error
-      msj = msj + "\r\n Edad fuera de rango";
+      msjage = "\r\n Edad fuera de rango";
       flag = true;
+    }
+
+    //Carga Msj de error
+    if (msjuser.length > 0 && msjage.length > 0) {
+      msj = msjuser + msjage;
+    } else if (msjuser.length > 0) {
+      msj = msjuser;
+    } else if (msjage.length > 0) {
+      msj = msjuser+msjage;
     }
     //Envia el chequeo
     error(flag, msj);
@@ -40,7 +54,7 @@ function CrearUsuario() {
         Age: Age,
         Name: Name,
         Email: Email,
-      })      
+      })
     }
   };
 
@@ -54,11 +68,11 @@ function CrearUsuario() {
     } else {
       errormsj.style.display = 'none';
       alert("Usuario creado correctamente!");
-        //Limpia los imputs
-        setName('');
-        setAge('');
-        setCi('');
-        setEmail('');
+      //Limpia los imputs
+      setName('');
+      setAge('');
+      setCi('');
+      setEmail('');
     }
   }
 

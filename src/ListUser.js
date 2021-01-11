@@ -19,14 +19,14 @@ function ListarPersonas() {
   };
 
   //Crea los estados
-  const [Listado,     setListado]   = useState([]); //Array
-  const [modalIsOpen, setIsOpen]    = useState(false); //Ventana modal Editar usuario
-  const [modalView,   setModalView] = useState(false); //Ventana modal View usuario
+  const [Listado, setListado] = useState([]); //Array
+  const [modalIsOpen, setIsOpen] = useState(false); //Ventana modal Editar usuario
+  const [modalView, setModalView] = useState(false); //Ventana modal View usuario
 
   //Constantes para editar usuario
-  const [Ci,    setCi]    = useState([]);
-  const [Name,  setName]  = useState([]);
-  const [Age,   setAge]   = useState([]);
+  const [Ci, setCi] = useState([]);
+  const [Name, setName] = useState([]);
+  const [Age, setAge] = useState([]);
   const [Email, setEmail] = useState([]);
   var total = 0;//Total de regitros de usuario
 
@@ -81,40 +81,44 @@ function ListarPersonas() {
     <div className="usertable">
       <h1>Listado de Personas</h1>
       <table>
-        <tr>
-          <th>Ci</th>
-          <th>Name</th>
-          <th>Age</th>
-          <th>Email</th>
-          <th>Actions</th>
-        </tr>
-        {Listado.map((val) => {
+        <tbody>
+          <tr>
+            <th>Ci</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Email</th>
+            <th>Actions</th>
+          </tr>
+        </tbody>
+        {Listado.map((val, i) => {
           //Toma el total de registros
           total = Listado.length;
           return (
-            <tr>
-              <td>{val.Ci}</td>
-              <td>{val.Name}</td>
-              <td>{val.Age}</td>
-              <td>{val.Email}</td>
-              <td>
-                <button className="editbutton" onClick={() => {
-                  openModal(val.Ci, val.Name, val.Age, val.Email)
-                }}>Edit</button>
-                <button className="deletebutton"
-                  onClick={() => {
-                    deleteUser(val.Ci)
-                  }}>Delete</button>
-                <button className="viewbutton"
-                  onClick={() => {
-                    openmodalView(val.Ci, val.Name, val.Age, val.Email)
-                  }}>View</button>
-              </td>
-            </tr>
+            <tbody key={i}>
+              <tr>
+                <td>{val.Ci}</td>
+                <td>{val.Name}</td>
+                <td>{val.Age}</td>
+                <td>{val.Email}</td>
+                <td>
+                  <button className="editbutton" onClick={() => {
+                    openModal(val.Ci, val.Name, val.Age, val.Email)
+                  }}>Edit</button>
+                  <button className="deletebutton"
+                    onClick={() => {
+                      deleteUser(val.Ci)
+                    }}>Delete</button>
+                  <button className="viewbutton"
+                    onClick={() => {
+                      openmodalView(val.Ci, val.Name, val.Age, val.Email)
+                    }}>View</button>
+                </td>
+              </tr>
+            </tbody>
           );
         })}
       </table>
-      
+
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
@@ -123,7 +127,7 @@ function ListarPersonas() {
         <form className="Edit">
           <h2>Editing user "{Name}"</h2>
           <div>
-            <img src={img} alt={Name}/>
+            <img src={img} alt={Name} />
             <br />
             <label>C.I.:</label>
             <br />
@@ -148,7 +152,7 @@ function ListarPersonas() {
           }}>Aplicar</button>
         </form>
       </Modal>
-      
+
 
       <Modal
         isOpen={modalView}
@@ -157,10 +161,10 @@ function ListarPersonas() {
         contentLabel="Example Modal">
         <form className="Edit">
           <h2>{Name}</h2>
-          <div> 
+          <div>
             <div>
-              <img src={img} alt={Name}/>
-            </div>            
+              <img src={img} alt={Name} />
+            </div>
             <p>C.I.:{Ci}</p>
             <p>Age:{Age}</p>
             <p>Email:{Email}</p>
@@ -196,24 +200,28 @@ function ListarUsuarios() {
     <div className="usertable">
       <h1>Listado de Usuarios</h1>
       <table>
-        <tr>
-          <th>Id</th>
-          <th>Name</th>
-          <th>Actions</th>
-        </tr>
-        {userlist.map((val) => {
+        <tbody>
+          <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Actions</th>
+          </tr>
+        </tbody>
+        {userlist.map((val,i) => {
           //Toma el total de registros
           total = userlist.length;
           return (
-            <tr>
-              <td>{val.Id}</td>
-              <td>{val.Name}</td>
-              <td>
-                <button className="editbutton">Edit</button>
-                <button className="deletebutton">Delete</button>
-                <button className="viewbutton">View</button>
-              </td>
-            </tr>
+            <tbody key={i}>
+              <tr>
+                <td>{val.Id}</td>
+                <td>{val.Name}</td>
+                <td>
+                  <button className="editbutton">Edit</button>
+                  <button className="deletebutton">Delete</button>
+                  <button className="viewbutton">View</button>
+                </td>
+              </tr>
+            </tbody>
           );
         })}
       </table>
