@@ -9,11 +9,13 @@ import {
 
 
 //Toma función de otra pagina para mostrar
-import CrearUsuario from './CreateUser.js';
-import { ListarPersonas, ListarUsuarios } from './ListUser.js';
+import CrearPersona from './CreatePerson.js';
+import ListarPersonas from './ListPerson.js';
+import ListarUsuarios from  './ListUser.js';
 import Statistcs from './StatisticsUser.js';
 import LoginUser from './LoginUser.js';
 import Userprofile from './Userprofile.js';
+import CreateUser from './CreateUser.js';
 
 //Aca exporta el archivo con las rutas armadas
 export default function BasicExample() {
@@ -29,7 +31,10 @@ export default function BasicExample() {
             <Link to="/Statistcs">Home</Link>
           </li>
           <li>
-            <Link to="/CrearUsuario">Crear Persona</Link>
+            <Link to="/CrearPersona">Crear Persona</Link>
+          </li>
+          <li>
+            <Link to="/CreateUser">Crear Usuario</Link>
           </li>
           <li>
             <Link to="/ListarPersonas">Listado de persona</Link>
@@ -47,8 +52,8 @@ export default function BasicExample() {
           <Route exact path="/Statistcs">
             <Statistcs />
           </Route>
-          <Route path="/CrearUsuario">
-            <CrearUsuario />
+          <Route path="/CrearPersona">
+            <CrearPersona />
           </Route>
           <Route path="/ListarPersonas">
             <ListarPersonas />
@@ -61,6 +66,9 @@ export default function BasicExample() {
           </Route>
           <Route path="/Userprofile">
             <Userprofile />
+          </Route>
+          <Route path="/CreateUser">
+            <CreateUser />
           </Route>
         </Switch>
       </div>
