@@ -5,7 +5,7 @@ import Axios from 'axios';
 //Funcion de formularios
 function CrearUsuario() {
   var flag = false;
-  
+
   // Variables de msj de error
   var msj = "";
   var msjage = "";
@@ -40,7 +40,7 @@ function CrearUsuario() {
     } else if (msjuser.length > 0) {
       msj = msjuser;
     } else if (msjage.length > 0) {
-      msj = msjuser+msjage;
+      msj = msjuser + msjage;
     }
     //Envia el chequeo
     error(flag, msj);
@@ -79,48 +79,56 @@ function CrearUsuario() {
   return (
     <div className="App">
       <h1>Crear Persona</h1>
+      <form>
+        <div className="form">
+          <label>C.I.:</label>
+          <input
+            min="1"
+            required
+            type="number"
+            name="Ci"
+            value={Ci}
+            onChange={(e) => {
+              setCi(e.target.value);
+            }} />
 
-      <div className="form">
-        <label>C.I.:</label>
-        <input
-          type="number"
-          name="Ci"
-          value={Ci}
-          onChange={(e) => {
-            setCi(e.target.value);
-          }} />
+          <label>Age:</label>
+          <input
+            required
+            type="number"
+            min="1"
+            max="110"
+            name="Age"
+            value={Age}
+            onChange={(e) => {
+              setAge(e.target.value);
+            }} />
 
-        <label>Age:</label>
-        <input
-          type="number"
-          min="1"
-          max="110"
-          name="Age"
-          value={Age}
-          onChange={(e) => {
-            setAge(e.target.value);
-          }} />
+          <label>Name:</label>
+          <input
+            required
+            type="text"
+            name="Name"
+            value={Name}
+            onChange={(e) => {
+              setName(e.target.value);
+            }} />
 
-        <label>Name:</label>
-        <input type="text"
-          name="Name"
-          value={Name}
-          onChange={(e) => {
-            setName(e.target.value);
-          }} />
+          <label>Email:</label>
+          <input
+            required
+            type="email"
+            name="Email"
+            value={Email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }} />
+          <span id="error" hidden={true} />
 
-        <label>Email:</label>
-        <input type="email"
-          name="Email"
-          value={Email}
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }} />
-        <span id="error" hidden={true} />
+          <button onClick={submiteData}>Crear</button>
 
-        <button onClick={submiteData}>Crear</button>
-
-      </div>
+        </div>
+      </form>
     </div>
   );
 }
