@@ -12,8 +12,7 @@ function CreateUser() {
     //Const
     const [Name, setName] = useState("");
     const [Pass, setPass] = useState("");
-    //Form
-    const {register, caca} = useForm;
+
 
     //Crear user
     const submiteUser = () => {
@@ -64,34 +63,32 @@ function CreateUser() {
     return (
         <div className="App">
             <h1>Creando usuario</h1>
-            <form onSubmit={submiteUser}>
-                <div className="form">
-                    <label>Name:</label>
-                    <input
-                        required
-                        placeholder="Name"
-                        type="text"
-                        name="Name"
-                        value={Name}
-                        onChange={(e) => {
-                            setName(e.target.value);
-                        }}
-                    />
-                    <label>Password:</label>
-                    <input
-                        required
-                        placeholder="Password"
-                        type="password"
-                        name="Pass"
-                        value={Pass}
-                        onChange={(e) => {
-                            setPass(e.target.value);
-                        }}
-                    />
-                    <span id="error" hidden={true} />
-                    <button type="submit">Crear</button>
-                </div>
-            </form>
+            <div className="form">
+                <label>Name:</label>
+                <input
+                    required
+                    placeholder="Name"
+                    type="text"
+                    name="Name"
+                    value={Name}
+                    onChange={(e) => {
+                        setName(e.target.value);
+                    }}
+                />
+                <label>Password:</label>
+                <input
+                    required
+                    placeholder="Password"
+                    type="password"
+                    name="Pass"
+                    value={Pass}
+                    onChange={(e) => {
+                        setPass(e.target.value);
+                    }}
+                />
+                <span id="error" hidden={true} />
+                <button type="submit" onClick={submiteUser}>Crear</button>
+            </div>
         </div>
     );
 }
